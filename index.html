@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Калькулятор умножения матриц</title>
+	<link rel="stylesheet" type="text/css" href="css/css.css">
+	
+	<script type="text/javascript" src="js/jquery-1.12.0.js"></script>	
+	<script type="text/javascript" src="js/js.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/function.js"></script>		
+</head>
+<body onLoad="document.all.form_a.reset(); document.all.form_b.reset()">
+	<div id="page">
+		<div id="sitebar">
+			<div>
+			<button id="multiplication" class="multiplication close" onclick="		
+				if(flag)
+				{
+					if(index_width_a != index_height_b)
+					{
+						error(flag);
+					}
+					else
+					{
+						matrixC_answer(flag, index_width_c, index_height_c, index_width_a);				
+					}
+				}
+				else
+				{
+					if(index_height_a != index_width_b)
+					{
+						error(flag);
+					}
+					else
+					{
+						matrixC_answer(flag, index_width_c, index_height_c, index_width_b);				
+					}
+				}
+			" onblur="error_off()">Умножить матрицы</button>
+			<div class="btn_block">
+				<button class="btn" onclick="				
+					if(flag)
+					{
+						document.getElementById('matrix_a').innerHTML = matrixA(index_width_a, index_height_a);
+						document.getElementById('matrix_b').innerHTML = matrixB(index_width_b, index_height_b);
+					}
+					else
+					{
+						document.getElementById('matrix_b').innerHTML = matrixA(index_width_a, index_height_a);
+						document.getElementById('matrix_a').innerHTML = matrixB(index_width_b, index_height_b);
+					}					
+					document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+					check(index_width_a, index_height_a, index_width_b, index_height_b);">
+					<span><span class="iconic clean"></span> Очистить матрицы</span>
+				</button><div class="br"></div>
+				<button class="btn" onclick="
+					var arrayA = saveMatrixA(index_width_a, index_height_a);
+					var arrayB = saveMatrixB(index_width_b, index_height_b);
+					if(flag) 
+					{ 
+						flag = false;
+						index_width_c = index_width_a;
+						index_height_c = index_height_b;
+						document.getElementById('logo_B').innerHTML = 'A';
+						document.getElementById('logo_A').innerHTML = 'B';
+						marginLogoLeft(index_width_a);
+						marginLogoTop(index_height_b);  
+					}
+					else 
+					{ 
+						flag = true;
+						index_width_c = index_width_b;
+						index_height_c = index_height_a;
+						document.getElementById('logo_B').innerHTML = 'B';
+						document.getElementById('logo_A').innerHTML = 'A';
+						marginLogoLeft(index_width_b);
+						marginLogoTop(index_height_a); 
+
+					}					
+					var matrix_first = document.getElementById('matrix_a').innerHTML;
+					var matrix_second = document.getElementById('matrix_b').innerHTML;
+					document.getElementById('matrix_a').innerHTML = matrix_second;
+					document.getElementById('matrix_b').innerHTML = matrix_first;
+					document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+					setMatrixA(arrayA, index_width_a, index_height_a);
+					setMatrixB(arrayB, index_width_b, index_height_b);
+				">
+					<span><span class="iconic exchange"></span> Поменять матрицы местами</span>
+				</button>
+			</div>
+			<div class="btn_block">
+				<div class="radios">
+					<button class="radio" id="radio_A" onclick="
+						document.getElementById('checked_A').style.display = 'block';
+						document.getElementById('checked_B').style.display = 'none';
+						if(index_height_a == 10)
+						{
+							$('#plus_row').addClass('close');							
+							$('#minus_row').removeClass('close');
+							document.getElementById('plus_row').disabled = true;
+							document.getElementById('minus_row').disabled = false;							
+						}
+						else if (index_height_a == 2)
+						{
+							$('#plus_row').removeClass('close');
+							$('#minus_row').addClass('close');
+							document.getElementById('plus_row').disabled = false;
+							document.getElementById('minus_row').disabled = true;
+						}
+						else
+						{
+							$('#plus_row').removeClass('close');
+							$('#minus_row').removeClass('close');
+							document.getElementById('plus_row').disabled = false;
+							document.getElementById('minus_row').disabled = false;
+						}
+
+						if(index_width_a == 10)
+						{
+							$('#plus_col').addClass('close');
+							$('#minus_col').removeClass('close');
+							document.getElementById('plus_col').disabled = true;
+							document.getElementById('minus_col').disabled = false;
+						}
+						else if (index_width_a == 2)
+						{
+							$('#plus_col').removeClass('close');
+							$('#minus_col').addClass('close');
+							document.getElementById('plus_col').disabled = false;
+							document.getElementById('minus_col').disabled = true;
+						}
+						else
+						{
+							$('#plus_col').removeClass('close');
+							$('#minus_col').removeClass('close');
+							document.getElementById('plus_col').disabled = false;
+							document.getElementById('minus_col').disabled = false;
+						}						
+						">
+						<div id="checked_A"></div>
+					</button><div>Матрица А</div>
+					<button class="radio" id="radio_B" onclick="
+						document.getElementById('checked_B').style.display = 'block';
+						document.getElementById('checked_A').style.display = 'none';
+						if(index_height_b == 10)
+						{
+							$('#plus_row').addClass('close');
+							$('#minus_row').removeClass('close');
+							document.getElementById('plus_row').disabled = true;
+							document.getElementById('minus_row').disabled = false;
+						}
+						else if (index_height_b == 2)
+						{
+							$('#plus_row').removeClass('close');
+							$('#minus_row').addClass('close');
+							document.getElementById('plus_row').disabled = false;
+							document.getElementById('minus_row').disabled = true;
+						}
+						else
+						{
+							$('#plus_row').removeClass('close');
+							$('#minus_row').removeClass('close');
+							document.getElementById('plus_row').disabled = false;
+							document.getElementById('minus_row').disabled = false;
+						}
+						if(index_width_b == 10)
+						{
+							$('#plus_col').addClass('close');
+							$('#minus_col').removeClass('close');
+							document.getElementById('plus_col').disabled = true;
+							document.getElementById('minus_col').disabled = false;
+						}
+						else if (index_width_b == 2)
+						{
+							$('#plus_col').removeClass('close');
+							$('#minus_col').addClass('close');
+							document.getElementById('plus_col').disabled = false;
+							document.getElementById('minus_col').disabled = true;
+						}
+						else
+						{
+							$('#plus_col').removeClass('close');
+							$('#minus_col').removeClass('close');
+							document.getElementById('plus_col').disabled = false;
+							document.getElementById('minus_col').disabled = false;
+						}
+						">
+						<div id="checked_B"></div>
+					</button><div>Матрица В</div>
+					<script type="text/javascript">
+						document.getElementById('checked_A').style.display = 'block';
+					</script>
+				</div>
+				<div>
+					<button id="plus_row" class="btn" onclick="												
+						var arrayA = saveMatrixA(index_width_a, index_height_a);
+						var widthAA = index_width_a, heigthAA = index_height_a;  
+						var arrayB = saveMatrixB(index_width_b, index_height_b);
+						var widthBB = index_width_b, heigthBB = index_height_b; 
+						if(document.getElementById('checked_A').style.display == 'block')
+						{
+							if(index_height_a == 2)
+							{
+								$('#minus_row').removeClass('close');
+								document.getElementById('minus_row').disabled = false;
+							}
+							if(index_height_a == 9)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_height_a < 10)
+							{
+								index_height_a++;							
+								if(flag)
+								{
+									document.getElementById('matrix_a').innerHTML = matrixA(index_width_a, index_height_a);
+									index_height_c = index_height_a;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoTop(index_height_a);
+								}
+								else
+								{
+									document.getElementById('matrix_b').innerHTML = matrixA(index_width_a, index_height_a);
+								}
+							}							
+						}
+						else
+						{
+							if(index_height_b == 2)
+							{
+								$('#minus_row').removeClass('close');
+								document.getElementById('minus_row').disabled = false;
+							}
+							if(index_height_b == 9)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_height_b < 10)
+							{
+								index_height_b++;							
+								if(flag)
+								{
+									document.getElementById('matrix_b').innerHTML = matrixB(index_width_b, index_height_b);								
+								}
+								else
+								{
+									document.getElementById('matrix_a').innerHTML = matrixB(index_width_b, index_height_b);
+									index_height_c = index_height_b;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoTop(index_height_b);
+								}
+							}
+						}
+						setMatrixA(arrayA, widthAA, heigthAA);
+						setMatrixB(arrayB, widthBB, heigthBB);
+						check(index_width_a, index_height_a, index_width_b, index_height_b);
+					"><span><span class="iconic plus"></span> Добавить</span></button>	
+					<button id="minus_row" class="btn" onclick="
+						var arrayA = saveMatrixA(index_width_a, index_height_a);
+						var widthAA = index_width_a, heigthAA = index_height_a;  
+						var arrayB = saveMatrixB(index_width_b, index_height_b);
+						var widthBB = index_width_b, heigthBB = index_height_b;
+						if(document.getElementById('checked_A').style.display == 'block')
+						{
+							if(index_height_a == 10)
+							{
+								$('#plus_row').removeClass('close');
+								document.getElementById('plus_row').disabled = false;
+							}
+							if(index_height_a == 3)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_height_a > 2)
+							{
+								index_height_a--;							
+								if(flag)
+								{
+									document.getElementById('matrix_a').innerHTML = matrixA(index_width_a, index_height_a);
+									index_height_c = index_height_a;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoTop(index_height_a);
+								}
+								else
+								{
+									document.getElementById('matrix_b').innerHTML = matrixA(index_width_a, index_height_a);
+								}
+							}
+						}
+						else
+						{
+							if(index_height_b == 10)
+							{
+								$('#plus_row').removeClass('close');
+								document.getElementById('plus_row').disabled = false;
+							}
+							if(index_height_b == 3)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_height_b > 2)
+							{
+								index_height_b--;							
+								if(flag)
+								{
+									document.getElementById('matrix_b').innerHTML = matrixB(index_width_b, index_height_b);								
+								}
+								else
+								{
+									document.getElementById('matrix_a').innerHTML = matrixB(index_width_b, index_height_b);
+									index_height_c = index_height_b;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoTop(index_height_b);
+								}
+							}
+						}
+						setMatrixA(arrayA, index_width_a, index_height_a);
+						setMatrixB(arrayB, index_width_b, index_height_b);
+						check(index_width_a, index_height_a, index_width_b, index_height_b);						
+					"><span><span class="iconic minus"></span> Удалить</span></button>
+					<div>строку</div>
+				</div>	
+				<div>
+					<button id="plus_col" class="btn" onclick="
+						var arrayA = saveMatrixA(index_width_a, index_height_a);
+						var widthAA = index_width_a, heigthAA = index_height_a;  
+						var arrayB = saveMatrixB(index_width_b, index_height_b);
+						var widthBB = index_width_b, heigthBB = index_height_b;
+						if(document.getElementById('checked_A').style.display == 'block')
+						{
+							if(index_width_a == 2)
+							{
+								$('#minus_col').removeClass('close');
+								document.getElementById('minus_col').disabled = false;
+							}
+							if(index_width_a == 9)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_width_a < 10)
+							{
+								index_width_a++;							
+								if(flag)
+								{
+									document.getElementById('matrix_a').innerHTML = matrixA(index_width_a, index_height_a);								
+								}
+								else
+								{
+									document.getElementById('matrix_b').innerHTML = matrixA(index_width_a, index_height_a);
+									index_width_c = index_width_a;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoLeft(index_width_a);
+								}
+							}
+						}
+						else 
+						{
+							if(index_width_b == 2)
+							{
+								$('#minus_col').removeClass('close');
+								document.getElementById('minus_col').disabled = false;
+							}
+							if(index_width_b == 9)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_width_b < 10)
+							{
+								index_width_b++;							
+								if(flag)
+								{
+									document.getElementById('matrix_b').innerHTML = matrixB(index_width_b, index_height_b);
+									index_width_c = index_width_b;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoLeft(index_width_b);								
+								}
+								else
+								{
+									document.getElementById('matrix_a').innerHTML = matrixB(index_width_b, index_height_b);								
+								}
+							}
+						}
+						setMatrixA(arrayA, widthAA, heigthAA);
+						setMatrixB(arrayB, widthBB, heigthBB);
+						check(index_width_a, index_height_a, index_width_b, index_height_b);
+					"><span><span class="iconic plus"></span> Добавить</span></button>
+					<button id="minus_col" class="btn" onclick="
+						var arrayA = saveMatrixA(index_width_a, index_height_a);
+						var widthAA = index_width_a, heigthAA = index_height_a;  
+						var arrayB = saveMatrixB(index_width_b, index_height_b);
+						var widthBB = index_width_b, heigthBB = index_height_b;
+						if(document.getElementById('checked_A').style.display == 'block')
+						{
+							if(index_width_a == 10)
+							{
+								$('#plus_col').removeClass('close');
+								document.getElementById('plus_col').disabled = false;
+							}
+							if(index_width_a == 3)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_width_a > 2)
+							{
+								index_width_a--;							
+								if(flag)
+								{
+									document.getElementById('matrix_a').innerHTML = matrixA(index_width_a, index_height_a);								
+								}
+								else
+								{
+									document.getElementById('matrix_b').innerHTML = matrixA(index_width_a, index_height_a);
+									index_width_c = index_width_a;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoLeft(index_width_a);
+								}
+							}
+						}
+						else 
+						{
+							if(index_width_b == 10)
+							{
+								$('#plus_col').removeClass('close');
+								document.getElementById('plus_col').disabled = false;
+							}
+							if(index_width_b == 3)
+							{
+								$(this).addClass('close');
+								this.disabled = true;
+							}
+							if(index_width_b > 2)
+							{
+								index_width_b--;							
+								if(flag)
+								{
+									document.getElementById('matrix_b').innerHTML = matrixB(index_width_b, index_height_b);
+									index_width_c = index_width_b;
+									document.getElementById('matrix_c').innerHTML = matrixC(index_width_c, index_height_c);
+									marginLogoLeft(index_width_b);								
+								}
+								else
+								{
+									document.getElementById('matrix_a').innerHTML = matrixB(index_width_b, index_height_b);								
+								}
+							}
+						}
+						setMatrixA(arrayA, index_width_a, index_height_a);
+						setMatrixB(arrayB, index_width_b, index_height_b);
+						check(index_width_a, index_height_a, index_width_b, index_height_b);
+					"><span><span class="iconic minus"></span> Удалить</span></button>
+					<div>столбец</div>
+				</div>								
+			</div></div>
+			<div id="information">								
+			</div>			
+		</div>
+		<div id="content">
+			
+			<div class="matrix_c">				
+				<div class="matrix_border_top"></div>		
+				<table id="matrix_c">
+					<script type="text/javascript">						
+						document.getElementById("matrix_c").innerHTML = matrixC(index_width_c, index_height_c);				
+					</script>				
+				</table>
+				<div class="matrix_border_bottom"></div>				
+			</div>
+
+			<div class="matrix_a">				
+				<div class="matrix_border_top"></div>
+				<form method="post" id="form_a">
+					<table id="matrix_a">
+						<script type="text/javascript">
+							document.getElementById("matrix_a").innerHTML = matrixA(index_width_a, index_height_a);
+						</script>				
+					</table>
+				</form>
+				<div class="matrix_border_bottom"></div>							
+			</div>
+			<h1 id="logo_A">A</h1>
+
+			<div class="br">
+			</div>
+
+			<div class="matrix_b">
+				<div class="matrix_border_top"></div>
+				<form method="post" id="form_b">
+					<table id="matrix_b">
+						<script type="text/javascript">
+							document.getElementById("matrix_b").innerHTML = matrixB(index_width_b, index_height_b);
+						</script>
+					</table>					
+				</form>
+				<div class="matrix_border_bottom"></div>				
+			</div>
+			<div class="br"></div>
+			<h1 id="logo_B">B</h1>		
+		</div>
+	</div>
+	<script type="text/javascript">
+		check(index_width_a, index_height_a, index_width_b, index_height_b);
+	</script>
+</body>
+</html>

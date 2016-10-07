@@ -1,0 +1,331 @@
+@font-face {
+font-family: 'konturIconic';
+src: url('../fonts/font.eot') format('eot'),
+url('../fonts/font.woff') format('woff'),  
+url('../fonts/font.ttf') format('truetype');
+font-style: normal;
+}
+* {
+	padding: 0;
+	margin: 0;
+}
+html, body {
+	margin: 0 auto;
+	height: 100%;
+	color: #404040;
+	font-size: 14px;
+	font-family: segoe ui, sans;
+	line-height: 20px;	
+}
+table {
+	border-collapse: separate;
+	border-spacing: 10px;	
+	border: solid 2px rgb(62, 62, 62);
+}
+td {		
+	width: 40px;
+	height: 48px;
+	border: solid 1px rgb(218, 218, 218);	
+}
+td input {
+	outline: none;	
+	box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.05);
+	padding-left: 8px;	
+	width: inherit;
+	height: inherit;
+	color: rgb(205, 205, 205);
+	border: none;	
+}
+td input:focus,
+{
+	outline: none;	
+	color: #404040;	
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none; 
+    margin: 0px;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+} 
+input[value] {
+	color: #404040;
+}
+input::-webkit-input-placeholder {
+	color: rgb(205, 205, 205);
+}
+input::-moz-placeholder {
+	color: rgb(205, 205, 205);
+}
+input:-moz-placeholder {
+	color: rgb(205, 205, 205);
+}
+input::-ms-input-placeholder {
+	color: rgb(205, 205, 205);
+}	
+#page {
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+#sitebar {
+	position: fixed;
+	float: left;
+	background: rgb(189, 189, 189);	
+	width: 345px;
+	height: 100%;
+}
+.iconic {	
+    font-family: 'konturIconic' !important;
+    font-size: 14px;
+    font-weight: normal !important;
+    -webkit-font-smoothing: antialiased;
+}
+.plus:before, .icon_E00D:before { content: "\e00d"; }
+.minus:before, .icon_E01E:before { content: "\e01e"; }
+.clean:before, .icon_E012:before { content: "\e012"; }
+.exchange:before, .icon_E01F:before { content: "\e01f"; }
+#content {	
+	float: left;
+	margin-left: 345px;
+}
+.multiplication {
+	color: rgb(255, 255, 255);
+	outline: none;
+    border: solid 1px rgb(0, 102, 33);	
+	border-radius: 3px;
+	background-image: linear-gradient( 90deg, rgb(55,145,11) 0%, rgb(75,169,29) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(55,145,11) 0%, rgb(75,169,29) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(55,145,11) 0%, rgb(75,169,29) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(55,145,11) 0%, rgb(75,169,29) 100%);
+	margin-top: 35px;
+	margin-left: 30px;
+	width: 190px;
+	height: 38px;	
+}
+.multiplication:hover {
+	color: rgb(255, 255, 255);
+	outline: none;
+    border: solid 1px rgb(0, 102, 33);
+	border-radius: 3px;
+	background-image: linear-gradient( 90deg, rgb(48,126,10) 0%, rgb(59,141,19) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(48,126,10) 0%, rgb(59,141,19) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(48,126,10) 0%, rgb(59,141,19) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(48,126,10) 0%, rgb(59,141,19) 100%);
+}
+.multiplication:active {
+	color: rgb(255, 255, 255);
+	outline: none;
+    border: solid 1px rgb(0, 102, 33);
+    border-radius: 3px;
+    background-image: linear-gradient( 90deg, rgb(33,119,11) 0%, rgb(61,147,38) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(33,119,11) 0%, rgb(61,147,38) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(33,119,11) 0%, rgb(61,147,38) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(33,119,11) 0%, rgb(61,147,38) 100%);
+	box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.multiplication:focus {
+	border: solid 1px #BDBDBD;
+	outline: solid 2px #009BE1;
+}
+.matrix_c, .matrix_a, .matrix_b {
+	float: left;
+	margin-top: 35px;
+	margin-left: 40px;	
+}
+.matrix_border_top {	
+	margin-bottom: -4px;	
+	margin-left: 10px;
+	margin-right: 10px;		
+	position: relative;	
+	width: inherit;
+	height: 4px;	
+	background: rgb(255, 255, 255);
+}
+.matrix_border_bottom {	
+	margin-top: -4px;	
+	margin-left: 10px;
+	margin-right: 10px;		
+	position: relative;	
+	width: inherit;
+	height: 4px;	
+	background: rgb(255, 255, 255);
+}
+#matrix_c {
+	color: rgb(205, 205, 205);
+}
+#matrix_c td {
+	padding-left: 8px;	
+	background: rgb(242, 242, 242);	
+} 
+.br {
+	width: 100%;
+	float: left;
+}
+.btn>span, 
+.btn:active>span, 
+.btn:hover>span,
+.btn:focus>span {
+	color: #404040;
+	float: left;
+	margin-top: 4px;
+	margin-left: 8px;		
+	margin-right: 15px;
+	margin-bottom: 7px;	
+}
+.btn {
+	outline: none;	
+	cursor: pointer;
+	float: left;
+	border: solid 1px #848484; 
+	border-radius: 1px;
+	background-image: linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	margin-bottom: 10px;
+	margin-right: 10px; 		
+}
+.btn:hover {
+	outline: none;
+	border-radius: 1px;
+	background-image: linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+}
+.btn:active {
+	outline: none;
+	border-radius: 1px;	
+	background: rgb(218, 218, 218);
+	box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
+}
+.btn:focus {
+	border: solid 1px #009ADE;
+	outline: solid 1px #009ADE;	
+}
+.btn_block {
+	float: left;
+	width: 100%;
+	margin-top: 55px;
+	margin-left: 30px;
+}
+.btn_block:last-child {
+	margin-top: 70px;	
+}
+.btn_block:last-child>div {
+	float: left;
+	width: 100%;	
+}
+.btn_block:last-child>div>div {
+	float: left;
+	margin-top: 4px;
+}
+.radios {
+	float: left;
+	margin-bottom: 18px;
+}
+.radio {
+	outline: none;
+	float: left;
+	border: solid 1px #868686;
+	border-radius: 100%;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;		
+	margin-right: 7px;
+	background-image: linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(235,235,235) 0%, rgb(254,254,254) 100%);	
+}
+.radio:active {
+	outline: none;
+	float: left;
+	border: solid 1px #868686;
+	border-radius: 100%;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;	
+	margin-right: 7px;	
+	background: #DADADA;
+	box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
+}
+.radio:hover {
+	outline: none;
+	float: left;
+	border: solid 1px #868686;
+	border-radius: 100%;
+	cursor: pointer;
+	width: 20px;
+	height: 20px;	
+	margin-right: 7px;	
+	background-image: linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -moz-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(222,222,222) 0%, rgb(242,242,242) 100%);
+}
+.radio:focus {
+	box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 1px #009ADE;	
+	border: solid 1px #009ADE;	
+}
+#radio_B {
+	margin-left: 20px;
+}
+#checked_A,
+#checked_B {
+	float: left;
+	vertical-align: middle;
+	margin-left: 4px;
+	margin-right: 4px;			
+	width: 9px;
+	height: 9px;
+	background: #404040;
+	border-radius: 100%;
+	display: none;	
+}
+#information {
+	margin-left: 30px;
+	margin-top: 40px;
+	margin-right: 40px;
+	float: left;
+}
+.close, 
+.close:hover,
+.close:focus,
+.close:active {
+	background: #F2F2F2;
+	color: #A4A4A4;
+	outline: none;
+	cursor: default;
+	box-shadow: none;
+	border: solid 1px #DADADA; 
+}
+.close span, 
+.close:hover span,
+.close:focus span,
+.close:active span {
+	color: #A4A4A4;	
+}
+.focus {
+	border: solid 1px #009ADE;
+	box-shadow: 0 0 0 1px #009ADE;
+}
+#logo_A, #logo_B {
+	float: left;
+	color: #404040;
+	font-size: 30px;
+	font-weight: normal;
+}
+#logo_A {
+	margin-top: 90px;
+	margin-left: 20px;	
+}
+#logo_B {
+	margin-left: 98px;
+	margin-top: 20px;
+}
+
+
